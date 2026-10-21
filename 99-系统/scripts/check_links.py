@@ -3,6 +3,7 @@
 扫描所有 .md 文件中的 [[双链]]，校验目标文件是否存在。
 用法：python3 99-系统/scripts/check_links.py
 退出码：0 = 全部通过；1 = 存在断链
+作者：洛芙 & 墨铃 · https://github.com/dplink/mindseed
 """
 import re
 import sys

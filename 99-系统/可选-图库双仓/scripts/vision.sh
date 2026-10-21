@@ -9,6 +9,7 @@
 # 前提：mind.config 中 VISION_ENABLED=1、VISION_REPO_SLUG 已填
 #      环境变量 GH_TOKEN 对图库有 contents 读写权限
 # 设计文档：本目录 图库规范.md · 99-系统/命名与规范.md
+# 作者：洛芙 & 墨铃 · https://github.com/dplink/mindseed
 # 路径：支持中文目录名（内部自动 URL 编码）
 # 网络提示：走环境变量代理（HTTP(S)_PROXY）
 # ============================================================

@@ -9,6 +9,7 @@
 # 机器前置：http.sslBackend=openssl 与 http.proxy 按 99-系统/托管规范.md 5.2 配好
 #          （本脚本只检测提示，不擅自改配置）
 # 状态文件写在仓库内（.gitignore 已排除），避免工作区外写入被沙箱拒绝
+# 作者：洛芙 & 墨铃 · https://github.com/dplink/mindseed
 # ============================================================
 $ErrorActionPreference = 'Continue'
 

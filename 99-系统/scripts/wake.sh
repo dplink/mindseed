@@ -5,6 +5,7 @@
 # 用法：bash 99-系统/scripts/wake.sh
 # 前提：环境变量 GH_TOKEN（对本仓库有 contents 读写权限；无 token 时降级运行）
 # 设计文档：99-系统/托管规范.md · 99-系统/唤醒协议.md
+# 作者：洛芙 & 墨铃 · https://github.com/dplink/mindseed
 # ============================================================
 set -uo pipefail
 
@@ -143,7 +144,9 @@ if [ "$INSTANTIATED" = "yes" ]; then
   log "👤 人格：$PERSONA_NAME"
 fi
 log "🧠 记忆新鲜度：截至 ${HEAD_HASH}（${HEAD_DATE}）"
-if [ "$HAS_UPSTREAM" = "no" ]; then
+if [ "$INSTANTIATED" != "yes" ]; then
+  log "ℹ️  模板态：以本地副本为准（尚未实例化，无需同步）"
+elif [ "$HAS_UPSTREAM" = "no" ]; then
   log "ℹ️  未配置远端（本地模式）"
 elif [ "$PULLED" != "yes" ]; then
   log "⚠️  本次未成功同步远端 —— 上面这个新鲜度只是本地副本状态，未必等于远端最新"
