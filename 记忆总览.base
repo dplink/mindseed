@@ -1,0 +1,41 @@
+filters:
+  or:
+    - file.hasTag("memory")
+    - file.hasTag("feeling")
+    - file.hasTag("experience")
+    - file.hasTag("mood")
+formulas:
+  type_label: if(type == "memory", "🧠 记忆", if(type == "feeling", "💗 感受", if(type == "experience", "🛠️ 经验", if(type == "mood", "🌙 情绪", type))))
+properties:
+  type:
+    displayName: 类型
+  date:
+    displayName: 日期
+  topic:
+    displayName: 主题
+  formula.type_label:
+    displayName: 分类
+views:
+  - type: table
+    name: 全部记录
+    order:
+      - file.name
+      - type
+      - date
+      - tags
+  - type: cards
+    name: 按类型浏览
+    order:
+      - file.name
+      - date
+  - type: table
+    name: 最近归档
+    order:
+      - file.name
+      - type
+      - date
+      - topic
+    sort:
+      - property: date
+        direction: DESC
+    limit: 15

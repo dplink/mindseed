@@ -1,0 +1,49 @@
+# MindSeed 心智库 · 守门 CI
+# 触发：push / PR → 隐私扫描 + 双链完整性检查
+# 设计文档：99-系统/托管规范.md
+
+name: guard
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  privacy:
+    name: 隐私守门
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: user-profile 永不入云（硬校验）
+        run: |
+          if git ls-files | grep -q "user-profile"; then
+            echo "❌ 危险：隐私文件被跟踪！"
+            git ls-files | grep "user-profile"
+            exit 1
+          fi
+          echo "✅ 隐私文件未入云"
+
+      - name: gitleaks 密钥泄漏扫描
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  links:
+    name: 双链完整性
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: "[[双链]] 检查"
+        run: python3 "99-系统/scripts/check_links.py"

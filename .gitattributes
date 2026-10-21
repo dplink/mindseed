@@ -1,0 +1,3 @@
+# 换行统一策略 —— 避免 Windows 与 Linux 双端产生「内容零差异却显示 modified」的幻影修改
+# 仓库内一律存 LF，工作区也 checkout 为 LF。
+* text=auto eol=lf
